@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriCare - Hospital Meal Service</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="app-container">
+            <div class="app-header">
+                <div class="logo-container">
+                    <img src="images/logo.png" alt="NutriCare Logo" class="logo">
+                    <h1>NutriCare</h1>
+                </div>
+                <h2>Select your role</h2>
+            </div>
+            
+            <div class="role-selection">
+                <div class="role-card" data-role="patient">
+                    <i class="fas fa-user-injured"></i>
+                    <span>Patient</span>
+                </div>
+                <div class="role-card" data-role="staff">
+                    <i class="fas fa-user-md"></i>
+                    <span>Staff</span>
+                </div>
+                <div class="role-card" data-role="visitor">
+                    <i class="fas fa-users"></i>
+                    <span>Visitor</span>
+                </div>
+                <div class="role-card" data-role="dietitian">
+                    <i class="fas fa-apple-alt"></i>
+                    <span>Dietitian</span>
+                </div>
+            </div>
+
+            <!-- Meal Selection Screen (Initially Hidden) -->
+            <div class="screen" id="meal-selection-screen" style="display: none;">
+                <div class="screen-header">
+                    <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+                    <h2>Select Your Meal</h2>
+                    <div class="filter-container">
+                        <button class="filter-btn"><i class="fas fa-filter"></i></button>
+                        <div class="search-container">
+                            <input type="text" placeholder="Search meals..." id="meal-search">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                </div><img src="images/logo.png" alt="NutriCare Logo" class="logo">
+                
+                <div class="meals-container">
+                    <!-- Meals will be populated here by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Dietary Requirements Screen (Initially Hidden) -->
+            <div class="screen" id="dietary-requirements-screen" style="display: none;">
+                <div class="screen-header">
+                    <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+                    <h2>Dietary Requirements</h2>
+                </div>
+                
+                <div class="dietary-options">
+                    <div class="dietary-option" data-requirement="diabetes">
+                        <span>Diabetes</span>
+                    </div>
+                    <div class="dietary-option" data-requirement="cardiac">
+                        <span>Cardiac</span>
+                    </div>
+                    <div class="dietary-option" data-requirement="maternity">
+                        <span>Maternity</span>
+                    </div>
+                    <div class="dietary-option" data-requirement="recovery">
+                        <span>Recovery</span>
+                    </div>
+                    <div class="dietary-option" data-requirement="low-sodium">
+                        <span>Low Sodium</span>
+                    </div>
+                    <div class="dietary-option" data-requirement="gluten-free">
+                        <span>Gluten Free</span>
+                    </div>
+                    <div class="dietary-option" data-requirement="vegetarian">
+                        <span>Vegetarian</span>
+                    </div>
+                    <div class="dietary-option" data-requirement="vegan">
+                        <span>Vegan</span>
+                    </div>
+                </div>
+                
+                <button class="primary-btn" id="apply-dietary-btn">Apply Filters</button>
+            </div>
+
+            <!-- Order Confirmation Screen (Initially Hidden) -->
+            <div class="screen" id="order-confirmation-screen" style="display: none;">
+                <div class="screen-header">
+                    <h2>Order Confirmed</h2>
+                </div>
+                
+                <div class="order-details">
+                    <div class="meal-image-container">
+                        <img id="confirmed-meal-image" src="" alt="Meal Image">
+                    </div>
+                    <div class="meal-info">
+                        <h3 id="confirmed-meal-name"></h3>
+                        <p id="confirmed-meal-description"></p>
+                    </div>
+                    
+                    <div class="delivery-info">
+                        <p>Estimated delivery: <span id="delivery-time"></span></p>
+                        <div class="delivery-status">
+                            <div class="status-step active">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Ordered</span>
+                            </div>
+                            <div class="status-step">
+                                <i class="fas fa-utensils"></i>
+                                <span>Preparing</span>
+                            </div>
+                            <div class="status-step">
+                                <i class="fas fa-truck"></i>
+                                <span>On the way</span>
+                            </div>
+                            <div class="status-step">
+                                <i class="fas fa-check-double"></i>
+                                <span>Delivered</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="rating-container">
+                        <h3>Rate your meal</h3>
+                        <div class="star-rating">
+                            <i class="far fa-star" data-rating="1"></i>
+                            <i class="far fa-star" data-rating="2"></i>
+                            <i class="far fa-star" data-rating="3"></i>
+                            <i class="far fa-star" data-rating="4"></i>
+                            <i class="far fa-star" data-rating="5"></i>
+                        </div>
+                        <button class="primary-btn" id="submit-rating-btn">OK</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dietitian Dashboard (Initially Hidden) -->
+            <div class="screen" id="dietitian-dashboard" style="display: none;">
+                <div class="screen-header">
+                    <button class="back-btn"><i class="fas fa-arrow-left"></i></button>
+                    <h2>Dietitian Dashboard</h2>
+                </div>
+                
+                <div class="dashboard-tabs">
+                    <button class="tab-btn active" data-tab="meal-management">Meal Management</button>
+                    <button class="tab-btn" data-tab="patient-nutrition">Patient Nutrition</button>
+                    <button class="tab-btn" data-tab="analytics">Analytics</button>
+                </div>
+                
+                <div class="tab-content" id="meal-management-content">
+                    <button class="primary-btn" id="add-meal-btn"><i class="fas fa-plus"></i> Add New Meal</button>
+                    <div class="meals-list">
+                        <!-- Meals will be populated here by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="patient-nutrition-content" style="display: none;">
+                    <div class="patient-search">
+                        <input type="text" placeholder="Search patients...">
+                        <button><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="patients-list">
+                        <!-- Patients will be populated here by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="analytics-content" style="display: none;">
+                    <div class="analytics-cards">
+                        <div class="analytics-card">
+                            <h3>Most Popular Meals</h3>
+                            <div class="chart-container" id="popular-meals-chart">
+                                <!-- Chart will be rendered here -->
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Dietary Requirements Distribution</h3>
+                            <div class="chart-container" id="dietary-chart">
+                                <!-- Chart will be rendered here -->
+                            </div>
+                        </div>
+                        <div class="analytics-card">
+                            <h3>Average Meal Ratings</h3>
+                            <div class="chart-container" id="ratings-chart">
+                                <!-- Chart will be rendered here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Meal Form (Initially Hidden) -->
+            <div class="modal" id="add-meal-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Add New Meal</h2>
+                        <button class="close-modal-btn"><i class="fas fa-times"></i></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="add-meal-form">
+                            <div class="form-group">
+                                <label for="meal-name">Meal Name</label>
+                                <input type="text" id="meal-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="meal-description">Description</label>
+                                <textarea id="meal-description" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="meal-image">Image URL</label>
+                                <input type="text" id="meal-image" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Suitable for Dietary Requirements</label>
+                                <div class="checkbox-group">
+                                    <label><input type="checkbox" value="diabetes"> Diabetes</label>
+                                    <label><input type="checkbox" value="cardiac"> Cardiac</label>
+                                    <label><input type="checkbox" value="maternity"> Maternity</label>
+                                    <label><input type="checkbox" value="recovery"> Recovery</label>
+                                    <label><input type="checkbox" value="low-sodium"> Low Sodium</label>
+                                    <label><input type="checkbox" value="gluten-free"> Gluten Free</label>
+                                    <label><input type="checkbox" value="vegetarian"> Vegetarian</label>
+                                    <label><input type="checkbox" value="vegan"> Vegan</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="meal-calories">Calories</label>
+                                <input type="number" id="meal-calories" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="meal-protein">Protein (g)</label>
+                                <input type="number" id="meal-protein" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="meal-carbs">Carbohydrates (g)</label>
+                                <input type="number" id="meal-carbs" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="meal-fat">Fat (g)</label>
+                                <input type="number" id="meal-fat" required>
+                            </div>
+                            <button type="submit" class="primary-btn">Add Meal</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
