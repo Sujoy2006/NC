@@ -4,7 +4,7 @@ const meals = [
         id: 1,
         name: 'Grilled Chicken',
         description: 'Grilled chicken breast with mixed vegetables and rice',
-        image: 'images/meals/grilled-chicken.jpg',
+        image: 'images/meals/Grilled-Chicken.jpg',
         dietaryRequirements: ['diabetes', 'cardiac', 'recovery', 'low-sodium'],
         nutrition: {
             calories: 320,
